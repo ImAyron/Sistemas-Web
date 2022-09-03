@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar w/ text</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,25 +45,27 @@
                 <p></p>
                 
                 <img src="img/picanha.jpg" class="img-thumbnail" alt="...">
-
+                <p></p>
             </div>
             <div class="col">
                 <div class="col">Picanha
                     <p></p>
                     <img src="img/picanha.jpg" class="img-thumbnail" alt="...">
-
+                    <p></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
+                  <p>R$150,00</p>
                     <input type="button" class="btn btn-primary" value=- onclick="subtrairItem()">
-                    <input id="soma" type="text" name="" value=0 disabled>
+                    <input id="soma" type="button" name="" value=0 disabled>
                     <input type="button" class="btn btn-primary" value=+ onclick="somarItem('soma')">
                 </div>
                 <div class="col">
-                    <input type="button" class="btn btn-primary" value=- onclick="subtrairItem()">
-                    <input id="soma2" type="text" name="" value=0 disabled>
-                    <input type="button" class="btn btn-primary" value=+ onclick="somarItem('soma2')">
+                  <p>R$150,00</p>
+                    <input type="button" class="btn btn-primary btn-sm" value=- onclick="subtrairItem()">
+                    <input id="soma2" class="btn btn-warning" type="button" name="" value=0 disabled>
+                    <input type="button" class="btn btn-primary btn-sm" value=+ onclick="somarItem('soma2')">
                 </div>
             </div>
             <div class="row">
@@ -71,6 +73,7 @@
 
                 </div>
                 <div class="col">
+                  <p></p>
                     <input type="submit" class="btn btn-danger" value="Finalizar pedido">
                 </div>
             </div>
