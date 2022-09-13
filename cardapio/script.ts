@@ -11,7 +11,7 @@ app.get('/', async (req, res) => {
   res.json(produtos)
 })
 
-app.post(`/produto`, async (req, res) => {
+app.post("/produto", async (req, res) => {
   const {nome,preco} =req.body
   const result = await prisma.produto.create({
     data: { 
