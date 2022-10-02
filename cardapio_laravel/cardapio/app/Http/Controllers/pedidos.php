@@ -41,7 +41,7 @@ class pedidos extends Controller
        
         produtos::create($request->all());
         session()->flash('mensagem', 'Antena cadastrada com sucesso!');
-        echo 'envio';
+        
     }
 
     /**
@@ -84,8 +84,10 @@ class pedidos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(produtos $produto)
     {
-        //
+        $produto->delete();
+
+
     }
 }

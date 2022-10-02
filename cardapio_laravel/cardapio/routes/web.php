@@ -1,7 +1,11 @@
 <?php
 
+
+use App\Http\Controllers\notasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pedidos;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,4 +21,8 @@ Route::get('/', function () {
     return view('principal');
 });
 
+
+
+
+Route::resource('/notas',notasController::class);
 Route::resource('/pedidos',pedidos::class);

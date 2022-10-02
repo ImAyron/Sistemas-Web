@@ -22,7 +22,8 @@
 
         <div class="form-group">
             <label for="preco">Preço</label>
-            <input type="float" class="form-control" name="preco" id="preco" required>
+            <input type="float" class="form-control" name="preco"  required>
+            <input type="email" name="" id="">
         </div>
 
         <div class="text-right">

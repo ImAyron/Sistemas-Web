@@ -39,55 +39,72 @@
                     </li>
                 </ul>
                 <span class="navbar-text">
-                   
+
                 </span>
             </div>
         </div>
     </nav>
+
     <div class="container text-center">
-        
-            <div class="row">
-                <div class="col">
-               
-                   
-                 @for($i=0;$i<=$count/2;$i++)
-                  <p>  <img src="/img/picanha.jpg" class="img-thumbnail" alt="..."><p></p>
-                    <p>R${{$pedidos[$i]->preco}}</p>
-                    <p>{{$pedidos[$i]->nome}}</p>
-                    <input type="button" class="btn btn-primary" value=- onclick="subtrairItem({{$pedidos[$i]->id}},{{$pedidos[$i]->preco}})">
-                      <input id={{$pedidos[$i]->id}} type="text" name="" value=0 disabled>
-                      <input type="button" class="btn btn-primary" value=+ onclick="somarItem({{$pedidos[$i]->id}},{{$pedidos[$i]->preco}})">
-                      <input type="hidden" name={{$pedidos[$i]->id}} value=>
-                      <input type="hidden" name="nome" value={{$pedidos[$i]->nome}}>
-                  </p>
-              @endfor
-             
-                </div>
-                <div class="col">
-                    <div class="col">
-                        @for ($i=$count/2+1;$i<$count;$i++)
-                            <p>  <img src="/img/picanha.jpg" class="img-thumbnail" alt="..."><p></p>
-                              <p>{{$pedidos[$i]->nome}}</p>
-                              <input type="button" class="btn btn-primary" value=- onclick="subtrairItem({{$pedidos[$i]->id}},{{$pedidos[$i]->preco}})">
-                                <input id={{$pedidos[$i]->id}} type="text" name="" value=0 disabled>
-                                <input type="button" class="btn btn-primary" value=+ onclick="somarItem({{$pedidos[$i]->id}},{{$pedidos[$i]->preco}})">
-                               <p>R${{$pedidos[$i]->preco}}</p>
-                               <input type="hidden" name={{$pedidos[$i]->id}} value=>
-                               
-                            </p>
+
+        <div class="row">
+            <div class="col">
+                
+                    @csrf
+                    <select name='mesa' id='mesa'>
+                        @for ($i = 0; $i <= $countM=3; $i++)
+                            <option value={{ $i }}>{{ $i }}</option>
                         @endfor
-        
-                    </div>
-                </div>
-                <div class="row">
+                    </select>
+
+
+                    @for ($i = 0; $i <= $count / 2; $i++)
+                        <p> <img src="/img/picanha.jpg" class="img-thumbnail" alt="...">
+                        <p></p>
+                        <p>R${{ $pedidos[$i]->preco }}</p>
+                        <p>{{ $pedidos[$i]->nome }}</p>
+                        <input type="button" class="btn btn-primary" value=-
+                            onclick="subtrairItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
+                        <input id={{ $pedidos[$i]->id }} type="text" name="" value=0 disabled>
+                        <input type="button" class="btn btn-primary" value=+
+                            onclick="somarItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
+                        <input type="hidden" name={{ $pedidos[$i]->id }} value=>
+                        <input type="hidden" name={{ 'nome' . $pedidos[$i]->id }} value=1>
+
+                        </p>
+                    @endfor
+
+            </div>
+            <div class="col">
+                <div class="col">
+                    @for ($i = $count / 2 + 1; $i < $count; $i++)
+                        <p> <img src="/img/picanha.jpg" class="img-thumbnail" alt="...">
+                        <p></p>
+                        <p>{{ $pedidos[$i]->nome }}</p>
+                        <input type="button" class="btn btn-primary" value=-
+                            onclick="subtrairItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
+                        <input id={{ $pedidos[$i]->id }} type="text" name="" value=0 disabled>
+                        <input type="button" class="btn btn-primary" value=+
+                            onclick="somarItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
+                        <p>R${{ $pedidos[$i]->preco }}</p>
+                        <input type="hidden" name={{ $pedidos[$i]->id }} value=>
+                        <input type="hidden" name={{ 'nome' . $pedidos[$i]->id }} value="1{{ $pedidos[$i]->nome }}">
+
+                        </p>
+                    @endfor
 
                 </div>
-                <div class="col">
-                    <p>Total Pedido: R$190,00</p>
-                    <input type="submit" class="btn btn-danger" value="Finalizar pedido" onclick="fecharNota()">
-                </div>
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="col">
+                <p>Total Pedido: R$190,00</p>
+                <input type="submit" class="btn btn-danger" value="Finalizar pedido" onclick="fecharNota()">
+                
             </div>
         </div>
+    </div>
     </div>
     </div>
 
@@ -96,39 +113,53 @@
 </html>
 
 <script>
-    function somarItem(id,preco) {
+    function somarItem(id, preco) {
         const valor = document.getElementById(id).value;
-        document.getElementById(id).value = Number(valor) + 1;
+        document.getElementById(id).value = parseFloat(valor) + 1;
 
-        var valora =   Number(valor) * preco;
-         document.getElementsByName(id).value=valora;
-         console.log( document.getElementsByName(id).value=valora)
-      
+        var valora = (parseFloat(valor) + 1) * preco;
+        document.getElementsByName(id).value = valora;
+        console.log(document.getElementsByName(id).value = valora)
+
 
     }
-   
 
-    function subtrairItem(id,preco) {
-       
+
+    function subtrairItem(id, preco) {
+
+
         const valor = document.getElementById(id).value;
         if (Number(valor) > 0)
-            document.getElementById(id).value = Number(valor) - 1;
-            var valora =   Number(valor) * preco;
-         document.getElementsByName(id).value=valora;
-         console.log( document.getElementsByName(id).value=valora)
+            document.getElementById(id).value = parseFloat(valor) - 1;
+        var valora = (parseFloat(valor) - 1) * preco;
+        document.getElementsByName(id).value = valora;
+        console.log(document.getElementsByName(id).value = valora)
     }
-    function fecharNota(){
-        
-        
-        for (var i=0;i<={{$count}};i++){
-            
-     
-            
+
+    function fecharNota() {
+
+        var nota = "";
+
+        for (var i = 0; i <= {{ $count }}; i++) {
+            var preco = document.getElementsByName(i).value;
+
+            var nome = document.getElementsByName("nome" + i).value;
+
+
+            if (preco && parseFloat(preco) !== 0.0) {
+
+                nota += nome + ': R$' + preco + '\n';
+
+            }
+
+
+
 
         }
-    
-        
+
+        console.log(nota)
+
+
 
     }
-    
 </script>
