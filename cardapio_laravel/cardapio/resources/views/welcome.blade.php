@@ -26,7 +26,7 @@
                 <p></p>
                 <a href="{{route('pedidos.create')}}"><button class="btn  btn-warning btn-lg btn-block">Cadastrar item</button></a>
                 <p></p>
-                <a href="{{route('pedidos.index')}}"><button class="btn  btn-warning btn-lg btn-block">Exibir Pedidos</button></a>
+                <a href="{{route('notas.index')}}"><button class="btn  btn-warning btn-lg btn-block">Exibir Pedidos</button></a>
             </div>
            
         </div>

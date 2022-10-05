@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        var v1 = 0;
-    </script>
+    
 
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,9 +17,10 @@
 @csrf
 
 <body>
+    
     <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('pedidos.create') }}">Criar</a>
+            <a class="navbar-brand" href="{{ route('pedidos.index') }}">Criar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -35,7 +34,7 @@
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="{{route('notas.index')}}">Pedidos</a>
                     </li>
                 </ul>
                 <span class="navbar-text">
@@ -49,16 +48,17 @@
 
         <div class="row">
             <div class="col">
-                
+                <form action="{{ route('notas.store') }}" method="post">
                     @csrf
+                    <label for="">Mesa:</label>
                     <select name='mesa' id='mesa'>
-                        @for ($i = 0; $i <= $countM=3; $i++)
+                        @for ($i = 1; $i <= $mesa; $i++)
                             <option value={{ $i }}>{{ $i }}</option>
                         @endfor
                     </select>
 
 
-                    @for ($i = 0; $i <= $count / 2; $i++)
+                    @for ($i = 0; $i <=intdiv($count,2); $i++)
                         <p> <img src="/img/picanha.jpg" class="img-thumbnail" alt="...">
                         <p></p>
                         <p>R${{ $pedidos[$i]->preco }}</p>
@@ -69,7 +69,7 @@
                         <input type="button" class="btn btn-primary" value=+
                             onclick="somarItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
                         <input type="hidden" name={{ $pedidos[$i]->id }} value=>
-                        <input type="hidden" name={{ 'nome' . $pedidos[$i]->id }} value=1>
+                        <input type="hidden" id={{ 'nome' .(-1 + $pedidos[$i]->id) }} value={{ $pedidos[$i]->nome }}>
 
                         </p>
                     @endfor
@@ -77,7 +77,8 @@
             </div>
             <div class="col">
                 <div class="col">
-                    @for ($i = $count / 2 + 1; $i < $count; $i++)
+                    <p></p>
+                    @for ($i = intdiv($count,2)+1; $i < $count; $i++)
                         <p> <img src="/img/picanha.jpg" class="img-thumbnail" alt="...">
                         <p></p>
                         <p>{{ $pedidos[$i]->nome }}</p>
@@ -88,7 +89,7 @@
                             onclick="somarItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
                         <p>R${{ $pedidos[$i]->preco }}</p>
                         <input type="hidden" name={{ $pedidos[$i]->id }} value=>
-                        <input type="hidden" name={{ 'nome' . $pedidos[$i]->id }} value="1{{ $pedidos[$i]->nome }}">
+                        <input type="hidden" id={{ 'nome' . (-1+$pedidos[$i]->id) }} value={{ $pedidos[$i]->nome }}>
 
                         </p>
                     @endfor
@@ -99,9 +100,10 @@
 
             </div>
             <div class="col">
-                <p>Total Pedido: R$190,00</p>
-                <input type="submit" class="btn btn-danger" value="Finalizar pedido" onclick="fecharNota()">
-                
+                <p id="prec">Total Pedido: R$190,00</p>
+                <input type="hidden" name="nota"id='nota'value="eoq">
+                <input type="submit" class="btn btn-danger" value="Finalizar pedido"  onclick="fecharNota()">
+                </form>
             </div>
         </div>
     </div>
@@ -119,7 +121,7 @@
 
         var valora = (parseFloat(valor) + 1) * preco;
         document.getElementsByName(id).value = valora;
-        console.log(document.getElementsByName(id).value = valora)
+
 
 
     }
@@ -133,17 +135,20 @@
             document.getElementById(id).value = parseFloat(valor) - 1;
         var valora = (parseFloat(valor) - 1) * preco;
         document.getElementsByName(id).value = valora;
-        console.log(document.getElementsByName(id).value = valora)
+
     }
 
     function fecharNota() {
 
-        var nota = "";
+        let nota = "";
+        let numero={{$count}};
+       
+            for (let i = 0; i < {{ $count }}; i++) {
+            let nome = document.getElementById("nome" + i).value;
+            let preco = document.getElementsByName(i).value;
 
-        for (var i = 0; i <= {{ $count }}; i++) {
-            var preco = document.getElementsByName(i).value;
-
-            var nome = document.getElementsByName("nome" + i).value;
+            
+            console.log(nome)
 
 
             if (preco && parseFloat(preco) !== 0.0) {
@@ -156,8 +161,12 @@
 
 
         }
+        
+       
 
-        console.log(nota)
+        var ok = document.getElementById("nota").value = String(nota);
+       
+        
 
 
 

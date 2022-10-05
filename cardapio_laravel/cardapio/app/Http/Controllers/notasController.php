@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\produtos;
 use App\Models\notas;
 use Illuminate\Http\Request;
-
-class pedidos extends Controller
+use App\Models\produtos;
+class notasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +12,12 @@ class pedidos extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
-        $count=produtos::count();
-        $pedidos=produtos::orderBy('id')->get(); 
+    {
+       
         $notas=notas::orderBy('id')->get(); 
         $countN=notas::count();
-        $mesa=10; 
-        return view('pedidos.index',['notas'=>$notas,'countN'=>$countN,'mesa'=>$mesa,'pedidos'=>$pedidos,'count'=>$count]);
+        
+        return view('notas.index',['notas'=>$notas,'countN'=>$countN]);
     }
 
     /**
@@ -30,7 +27,7 @@ class pedidos extends Controller
      */
     public function create()
     {
-       return view('pedidos.create');
+        //
     }
 
     /**
@@ -41,10 +38,9 @@ class pedidos extends Controller
      */
     public function store(Request $request)
     {
-       
-        produtos::create($request->all());
-        session()->flash('mensagem', 'nota cadastrada com sucesso!');
-        
+        notas::create($request->all());
+        session()->flash('mensagem', 'Nota criada cadastrada com sucesso!');
+        return redirect()->route('pedidos.index');
     }
 
     /**
@@ -53,9 +49,9 @@ class pedidos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(notas $nota)
     {
-        return view('pedidos.show');
+        return view('notas.show',['nota'=>$nota]);
     }
 
     /**
@@ -87,10 +83,8 @@ class pedidos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(produtos $produto)
+    public function destroy($id)
     {
-        $produto->delete();
-
-
+        //
     }
 }
