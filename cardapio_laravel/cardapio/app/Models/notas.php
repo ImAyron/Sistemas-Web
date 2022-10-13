@@ -12,7 +12,7 @@ class notas extends Model
     protected $fillable = [
         'mesa',
         'nota',
-       
+        'total',
         
     ];
 

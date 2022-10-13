@@ -16,9 +16,9 @@
 </head>
 @csrf
 
-<body>
+<body style="background-color:#ffe187; color:rgb(128, 37, 5)">
     
-    <nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg bg-warning">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('pedidos.index') }}">Criar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -28,11 +28,9 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                        <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
+                
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('notas.index')}}">Pedidos</a>
                     </li>
@@ -50,12 +48,8 @@
             <div class="col">
                 <form action="{{ route('notas.store') }}" method="post">
                     @csrf
-                    <label for="">Mesa:</label>
-                    <select name='mesa' id='mesa'>
-                        @for ($i = 1; $i <= $mesa; $i++)
-                            <option value={{ $i }}>{{ $i }}</option>
-                        @endfor
-                    </select>
+                   
+                    
 
 
                     @for ($i = 0; $i <=intdiv($count,2); $i++)
@@ -63,10 +57,10 @@
                         <p></p>
                         <p>R${{ $pedidos[$i]->preco }}</p>
                         <p>{{ $pedidos[$i]->nome }}</p>
-                        <input type="button" class="btn btn-primary" value=-
+                        <input type="button" class="btn btn-warning" value=-
                             onclick="subtrairItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
                         <input id={{ $pedidos[$i]->id }} type="text" name="" value=0 disabled>
-                        <input type="button" class="btn btn-primary" value=+
+                        <input type="button" class="btn btn-warning" value=+
                             onclick="somarItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
                         <input type="hidden" name={{ $pedidos[$i]->id }} value=>
                         <input type="hidden" id={{ 'nome' .(-1 + $pedidos[$i]->id) }} value={{ $pedidos[$i]->nome }}>
@@ -77,17 +71,19 @@
             </div>
             <div class="col">
                 <div class="col">
-                    <p></p>
+                    
                     @for ($i = intdiv($count,2)+1; $i < $count; $i++)
                         <p> <img src="/img/picanha.jpg" class="img-thumbnail" alt="...">
                         <p></p>
+                        <p>R${{ $pedidos[$i]->preco }}</p>
                         <p>{{ $pedidos[$i]->nome }}</p>
-                        <input type="button" class="btn btn-primary" value=-
+                       
+                        <input type="button" class="btn btn-warning" value=-
                             onclick="subtrairItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
                         <input id={{ $pedidos[$i]->id }} type="text" name="" value=0 disabled>
-                        <input type="button" class="btn btn-primary" value=+
+                        <input type="button" class="btn btn-warning" value=+
                             onclick="somarItem({{ $pedidos[$i]->id }},{{ $pedidos[$i]->preco }})">
-                        <p>R${{ $pedidos[$i]->preco }}</p>
+                       
                         <input type="hidden" name={{ $pedidos[$i]->id }} value=>
                         <input type="hidden" id={{ 'nome' . (-1+$pedidos[$i]->id) }} value={{ $pedidos[$i]->nome }}>
 
@@ -100,7 +96,15 @@
 
             </div>
             <div class="col">
-                <p id="prec">Total Pedido: R$190,00</p>
+                <label for="">Mesa:</label>
+                <select class="custom-select"name='mesa' id='mesa'>
+                    
+                    @for ($i = 1; $i <= $mesa; $i++)
+                        <option value={{ $i }}>{{ $i }}</option>
+                    @endfor
+                </select>
+                <input hidden="text" name="total" id="total" value= disabled>
+                
                 <input type="hidden" name="nota"id='nota'value="eoq">
                 <input type="submit" class="btn btn-danger" value="Finalizar pedido"  onclick="fecharNota()">
                 </form>
@@ -141,30 +145,33 @@
     function fecharNota() {
 
         let nota = "";
-        let numero={{$count}};
+        let valorTotal=0;
        
             for (let i = 0; i < {{ $count }}; i++) {
             let nome = document.getElementById("nome" + i).value;
-            let preco = document.getElementsByName(i).value;
-
-            
             console.log(nome)
+            let preco = document.getElementsByName(i+1).value;
+            console.log(preco)
+            
+           
 
 
             if (preco && parseFloat(preco) !== 0.0) {
 
                 nota += nome + ': R$' + preco + '\n';
+                valorTotal= parseFloat(valorTotal)+parseFloat(preco);
 
             }
-
-
+            
 
 
         }
+        document.getElementById('nota').value=nota;
+        document.getElementById('total').value=valorTotal;
         
        
 
-        var ok = document.getElementById("nota").value = String(nota);
+        
        
         
 

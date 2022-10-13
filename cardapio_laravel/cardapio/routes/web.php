@@ -4,7 +4,7 @@
 use App\Http\Controllers\notasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pedidos;
-
+use App\Models\produtos;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,11 @@ Route::get('/', function () {
 });
 
 
+Route::get('/exibir', function () {
+    $pedidos=produtos::orderBy('id')->get(); 
 
+    return view('pedidos.exibir',['pedidos'=>$pedidos]);
+});
 
 Route::resource('/notas',notasController::class);
 Route::resource('/pedidos',pedidos::class);

@@ -43,7 +43,8 @@ class pedidos extends Controller
     {
        
         produtos::create($request->all());
-        session()->flash('mensagem', 'nota cadastrada com sucesso!');
+       
+        return redirect()->route('pedidos.index');
         
     }
 
@@ -53,9 +54,9 @@ class pedidos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(produtos $pedido)
     {
-        return view('pedidos.show');
+        return view('pedidos.show',['pedido'=> $pedido]);
     }
 
     /**
@@ -64,9 +65,10 @@ class pedidos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(produtos $pedido)
     {
-        //
+
+        return view('pedidos.edit',['pedido'=>$pedido]);
     }
 
     /**
@@ -76,9 +78,17 @@ class pedidos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, produtos $pedido)
     {
-        //
+        $pedido->fill($request->all());
+        $pedido->save();
+
+    }
+
+    public function exibir(){
+        $pedidos=produtos::orderBy('id')->get(); 
+
+        return view('pedidos.exibir',['pedidos'=>$pedidos]);
     }
 
     /**
@@ -87,10 +97,11 @@ class pedidos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(produtos $produto)
+    public function destroy(produtos  $pedido)
     {
-        $produto->delete();
-
+        $pedido->delete();
+        
+       
 
     }
 }

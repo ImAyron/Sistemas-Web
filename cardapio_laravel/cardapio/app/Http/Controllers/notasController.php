@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\notas;
 use Illuminate\Http\Request;
-use App\Models\produtos;
+
 class notasController extends Controller
 {
     /**
@@ -40,7 +40,7 @@ class notasController extends Controller
     {
         notas::create($request->all());
         session()->flash('mensagem', 'Nota criada cadastrada com sucesso!');
-        return redirect()->route('pedidos.index');
+        return redirect()->route('notas.index');
     }
 
     /**

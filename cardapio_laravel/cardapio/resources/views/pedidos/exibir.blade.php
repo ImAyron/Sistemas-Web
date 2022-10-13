@@ -40,17 +40,11 @@
 
         </div>
         <div class="col-6">
-            @foreach($notas as $a)
+            @foreach($pedidos as $a)
             <p></p>
             <p>
-            <a style="color:rgb(128, 37, 5)" href="{{route('notas.show',$a->id)}}">Pedido mesa: {{$a->mesa}}
-            @if($a->situation == false){
-                Em preparação
-            }
-            @else{
-                Pronto
-            }
-            @endif
+            <a style="color:rgb(128, 37, 5)" href="{{route('pedidos.show',$a->id)}}"> {{$a->nome}}
+            
             </a>
         </p>
             @endforeach
