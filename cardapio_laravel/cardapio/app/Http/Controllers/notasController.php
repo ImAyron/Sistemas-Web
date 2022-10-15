@@ -14,7 +14,7 @@ class notasController extends Controller
     public function index()
     {
        
-        $notas=notas::orderBy('id')->get(); 
+        $notas=notas::orderBy('created_at')->get(); 
         $countN=notas::count();
         
         return view('notas.index',['notas'=>$notas,'countN'=>$countN]);

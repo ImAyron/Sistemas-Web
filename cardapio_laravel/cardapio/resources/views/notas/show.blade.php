@@ -14,7 +14,7 @@
 <body style="background-color:#ffe187; color:rgb(128, 37, 5)">
     <nav class="navbar navbar-expand-lg bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('pedidos.index') }}">Criar</a>
+            <a class="navbar-brand" href="http://127.0.0.1:8000/">Inicio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <x-fas-drumstick-bite />
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('pedidos.index') }}">Criar</a>
                     </li>
 
                     <li class="nav-item">
@@ -43,15 +40,28 @@
         <div class="col">
 
         </div>
-        <div class="col">
+        <div class="col-6" style="text-align: center">
+            <p></p>
             <p><img src="/img/picanha.jpg" class="img-thumbnail" alt="..."></p>
-            
-            <p>mesa:{{ $nota->mesa }}</p>
-            <p>nota detalhada:
-                <p></p>
-                {{ $nota->nota }}</p>
-            <p>pedido total:{{$nota->total}}</p>
-            <button>Pedido pronto !!!</button>
+
+            <p>
+            <h1><span class="badge bg-warning">MESA {{ $nota->mesa }}</span></h1>
+            </p>
+           <h2>Nota Detalhada</h2>
+            <p></p>
+            <ul class="list-group list-group-numbered ">
+               
+                <?php
+                $str = $nota->nota;
+                $arr = explode(' ', $str);
+                for ($i = 0; $i < count($arr); $i++) {
+                    echo '<li class="list-group-item list-group-item-warning">' . $arr[$i] . '</li>';
+                }
+                ?>
+            </ul>
+        <p></p>
+            <h4><span class="badge bg-danger">Pedido total R${{ $nota->total }}</span></h4>
+            <button class="btn btn-warning">Pedido pronto !!!</button>
 
         </div>
         <div class="col">

@@ -20,7 +20,7 @@
     
     <nav class="navbar navbar-expand-lg bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('pedidos.index') }}">Criar</a>
+            <a class="navbar-brand" href="http://127.0.0.1:8000/">Inicio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('pedidos.index') }}">Criar</a>
                     </li>
                 
                     <li class="nav-item">
@@ -158,7 +158,7 @@
 
             if (preco && parseFloat(preco) !== 0.0) {
 
-                nota += nome + ': R$' + preco + '\n';
+                nota += nome + ':R$' + preco + ' \n';
                 valorTotal= parseFloat(valorTotal)+parseFloat(preco);
 
             }
