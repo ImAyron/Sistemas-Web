@@ -60,9 +60,9 @@ class notasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(notas $nota)
     {
-        //
+        return view('notas.edit',['nota'=>$nota]);
     }
 
     /**
@@ -72,9 +72,11 @@ class notasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, notas $nota)
     {
-        //
+        $nota->fill($request->all());
+        $nota->save();
+        return redirect()->route('notas.index');
     }
 
     /**

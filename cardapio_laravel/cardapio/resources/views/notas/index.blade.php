@@ -25,6 +25,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('notas.index')}}">Pedidos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('pedidos.index')}}">Novo Pedido</a>
+                    </li>
+                  
                 </ul>
                 <span class="navbar-text">
 
@@ -41,7 +45,7 @@
             <p></p>
             <p>
             <a style="color:rgb(128, 37, 5)" href="{{route('notas.show',$a->id)}}">Pedido mesa: {{$a->mesa}}
-            @if($a->situation == false){
+            @if($a->situation == '0'){
                 Em preparação
             }
             @else{

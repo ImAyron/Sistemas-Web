@@ -28,12 +28,18 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('pedidos.index') }}">Criar</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('pedidos.create') }}">Criar</a>
                     </li>
                 
-                    <li class="nav-item">
+                    <li class="nav-item ">
                         <a class="nav-link" href="{{route('notas.index')}}">Pedidos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('pedidos.index')}}">Novo Pedido</a>
+                    </li>
+                    
+                  
+                  
                 </ul>
                 <span class="navbar-text">
 
@@ -51,8 +57,9 @@
                    
                     
 
-
+                    <p></p>
                     @for ($i = 0; $i <=intdiv($count,2); $i++)
+                    
                         <p> <img src="/img/picanha.jpg" class="img-thumbnail" alt="...">
                         <p></p>
                         <p>R${{ $pedidos[$i]->preco }}</p>
@@ -71,8 +78,9 @@
             </div>
             <div class="col">
                 <div class="col">
-                    
+                    <p></p>
                     @for ($i = intdiv($count,2)+1; $i < $count; $i++)
+                    
                         <p> <img src="/img/picanha.jpg" class="img-thumbnail" alt="...">
                         <p></p>
                         <p>R${{ $pedidos[$i]->preco }}</p>

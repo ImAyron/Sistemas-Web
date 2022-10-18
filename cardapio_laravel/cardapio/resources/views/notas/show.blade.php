@@ -28,6 +28,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('notas.index') }}">Pedidos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('pedidos.index')}}">Novo Pedido</a>
+                    </li>
+                  
                 </ul>
                 <span class="navbar-text">
 
@@ -61,7 +65,7 @@
             </ul>
         <p></p>
             <h4><span class="badge bg-danger">Pedido total R${{ $nota->total }}</span></h4>
-            <button class="btn btn-warning">Pedido pronto !!!</button>
+            <button class="btn btn-warning" ><a href="{{ route('notas.edit', $nota->id) }}"> pronto !!!</a></button>
 
         </div>
         <div class="col">
@@ -71,3 +75,12 @@
 </body>
 
 </html>
+
+<script>
+
+    function pedidoPronto(){
+
+       
+    }
+
+</script>

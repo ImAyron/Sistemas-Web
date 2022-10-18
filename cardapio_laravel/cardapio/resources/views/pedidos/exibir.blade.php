@@ -28,6 +28,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('notas.index')}}">Pedidos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('pedidos.index')}}">Novo Pedido</a>
+                    </li>
+                  
                 </ul>
                 <span class="navbar-text">
 

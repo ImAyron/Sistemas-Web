@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('mesa');
             $table->string('nota');
-            $table->boolean('situation')->default(false);
+            $table->string('situation')->default('0');
             $table->float('total');
             $table->timestamps();
         });

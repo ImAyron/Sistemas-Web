@@ -13,6 +13,7 @@ class notas extends Model
         'mesa',
         'nota',
         'total',
+        'situation'
         
     ];
 
